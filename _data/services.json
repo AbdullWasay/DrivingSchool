@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "5d725a4a7b292f5f8ceff789",
+    "name": "Grundkurs Theorie",
+    "description": "Umfassender Theoriekurs, der alle Aspekte der Führerscheinprüfung abdeckt",
+    "category": "Theorie",
+    "price": 300,
+    "duration": 1200,
+    "isAvailable": true,
+    "school": "5d713995b721c3bb38c1f5d0"
+  },
+  {
+    "_id": "5d725c84c4ded7bcb480eaa0",
+    "name": "Standard Fahrstunden",
+    "description": "Regelmäßige Fahrstunden mit erfahrenen Fahrlehrern",
+    "category": "Praxis",
+    "price": 45,
+    "duration": 45,
+    "isAvailable": true,
+    "school": "5d713995b721c3bb38c1f5d0"
+  },
+  {
+    "_id": "5d725cb9c4ded7bcb480eaa1",
+    "name": "Intensiv-Fahrkurs",
+    "description": "Schließen Sie Ihre Fahrausbildung in nur 2 Wochen mit unserem Intensivkurs ab",
+    "category": "Praxis",
+    "price": 1200,
+    "duration": 4800,
+    "isAvailable": true,
+    "school": "5d713995b721c3bb38c1f5d0"
+  },
+  {
+    "_id": "5d725cd2c4ded7bcb480eaa2",
+    "name": "Prüfungsvorbereitung",
+    "description": "Spezielle Stunden zur Vorbereitung auf die Führerscheinprüfung",
+    "category": "Prüfungsvorbereitung",
+    "price": 60,
+    "duration": 90,
+    "isAvailable": true,
+    "school": "5d713995b721c3bb38c1f5d0"
+  },
+  {
+    "_id": "5d725ce8c4ded7bcb480eaa3",
+    "name": "Grundkurs Theorie",
+    "description": "Umfassender Theoriekurs, der alle Aspekte der Führerscheinprüfung abdeckt",
+    "category": "Theorie",
+    "price": 320,
+    "duration": 1200,
+    "isAvailable": true,
+    "school": "5d713a66ec8f2b88b8f830b8"
+  },
+  {
+    "_id": "5d725cfec4ded7bcb480eaa4",
+    "name": "Standard Fahrstunden",
+    "description": "Regelmäßige Fahrstunden mit erfahrenen Fahrlehrern",
+    "category": "Praxis",
+    "price": 50,
+    "duration": 45,
+    "isAvailable": true,
+    "school": "5d713a66ec8f2b88b8f830b8"
+  }
+]

@@ -1,0 +1,109 @@
+[
+  {
+    "_id": "5d713995b721c3bb38c1f5d0",
+    "name": "Fahrschule Schmidt",
+    "description": "Fahrschule Schmidt ist eine erstklassige Fahrschule mit über 20 Jahren Erfahrung. Wir bieten umfassende Ausbildung für alle Führerscheinklassen.",
+    "website": "https://fahrschule-schmidt.de",
+    "phone": "(+49) 123-456-7890",
+    "email": "info@fahrschule-schmidt.de",
+    "address": "Hauptstraße 123, 10115 Berlin",
+    "location": {
+      "type": "Point",
+      "coordinates": [13.404954, 52.520008],
+      "formattedAddress": "Hauptstraße 123, 10115 Berlin, Germany",
+      "street": "Hauptstraße 123",
+      "city": "Berlin",
+      "state": "Berlin",
+      "zipcode": "10115",
+      "country": "Germany"
+    },
+    "features": [
+      "Theoriestunden",
+      "Praxisstunden",
+      "Intensivkurse",
+      "Automatikgetriebe",
+      "Schaltgetriebe"
+    ],
+    "averageRating": 4.8,
+    "photo": "no-photo.jpg",
+    "pricing": {
+      "registrationFee": 150,
+      "theoryLesson": 15,
+      "practicalLesson": 45,
+      "examFee": 200
+    },
+    "user": "5d7a514b5d2c12c7449be043"
+  },
+  {
+    "_id": "5d713a66ec8f2b88b8f830b8",
+    "name": "Fahrschule Müller",
+    "description": "Fahrschule Müller bietet personalisierte Fahrstunden mit erfahrenen Fahrlehrern. Wir konzentrieren uns auf Sicherheit und Vertrauensaufbau.",
+    "website": "https://fahrschule-mueller.de",
+    "phone": "(+49) 234-567-8901",
+    "email": "info@fahrschule-mueller.de",
+    "address": "Berliner Straße 45, 80331 München",
+    "location": {
+      "type": "Point",
+      "coordinates": [11.581981, 48.135125],
+      "formattedAddress": "Berliner Straße 45, 80331 München, Germany",
+      "street": "Berliner Straße 45",
+      "city": "München",
+      "state": "Bayern",
+      "zipcode": "80331",
+      "country": "Germany"
+    },
+    "features": [
+      "Theoriestunden",
+      "Praxisstunden",
+      "Motorradführerschein",
+      "Online-Buchung",
+      "Mehrsprachige Fahrlehrer"
+    ],
+    "averageRating": 4.5,
+    "photo": "no-photo.jpg",
+    "pricing": {
+      "registrationFee": 180,
+      "theoryLesson": 18,
+      "practicalLesson": 50,
+      "examFee": 220
+    },
+    "user": "5d7a514b5d2c12c7449be043"
+  },
+  {
+    "_id": "5d713c88ec8f2b88b8f830c9",
+    "name": "Fahrschule Klingenstadt",
+    "description": "Fahrschule Klingenstadt in Solingen bietet moderne Fahrausbildung in der traditionsreichen Klingenstadt. Wir sind stolz darauf, seit über 15 Jahren qualitativ hochwertige Fahrausbildung in Nordrhein-Westfalen anzubieten.",
+    "website": "https://fahrschule-klingenstadt.de",
+    "phone": "(+49) 212-345-6789",
+    "email": "info@fahrschule-klingenstadt.de",
+    "address": "Kölner Straße 15, 42651 Solingen",
+    "location": {
+      "type": "Point",
+      "coordinates": [7.0845, 51.1657],
+      "formattedAddress": "Kölner Straße 15, 42651 Solingen, Germany",
+      "street": "Kölner Straße 15",
+      "city": "Solingen",
+      "state": "Nordrhein-Westfalen",
+      "zipcode": "42651",
+      "country": "Germany"
+    },
+    "features": [
+      "Theoriestunden",
+      "Praxisstunden",
+      "Intensivkurse",
+      "Automatikgetriebe",
+      "Schaltgetriebe",
+      "Online-Buchung",
+      "Mehrsprachige Fahrlehrer"
+    ],
+    "averageRating": 4.7,
+    "photo": "no-photo.jpg",
+    "pricing": {
+      "registrationFee": 160,
+      "theoryLesson": 16,
+      "practicalLesson": 48,
+      "examFee": 210
+    },
+    "user": "5d7a514b5d2c12c7449be043"
+  }
+]

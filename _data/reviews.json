@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "5d7a514b5d2c12c7449be045",
+    "title": "Großartige Erfahrung!",
+    "text": "Ich habe meine Führerscheinprüfung beim ersten Versuch bestanden, dank der exzellenten Ausbildung bei Fahrschule Schmidt. Die Fahrlehrer waren geduldig und gründlich.",
+    "rating": 5,
+    "school": "5d713995b721c3bb38c1f5d0",
+    "user": "5d7a514b5d2c12c7449be044"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be046",
+    "title": "Gute Schule, aber teuer",
+    "text": "Die Ausbildung war gut, aber ich fand die Preise etwas hoch im Vergleich zu anderen Schulen in der Gegend.",
+    "rating": 4,
+    "school": "5d713995b721c3bb38c1f5d0",
+    "user": "5d7a514b5d2c12c7449be044"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be047",
+    "title": "Excellent theory classes",
+    "text": "The theory classes were very informative and well-structured. The instructor made complex topics easy to understand.",
+    "rating": 5,
+    "school": "5d713a66ec8f2b88b8f830b8",
+    "user": "5d7a514b5d2c12c7449be044"
+  }
+]
