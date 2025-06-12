@@ -94,7 +94,9 @@ export function ImageUpload({
       formData.append("type", uploadType);
 
       // Upload to Cloudinary via our API
-      const response = await fetch("http://localhost:5000/api/upload/single", {
+      const API_URL =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+      const response = await fetch(`${API_URL}/upload/single`, {
         method: "POST",
         body: formData,
       });

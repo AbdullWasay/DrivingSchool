@@ -104,13 +104,12 @@ export function MultiImageUpload({
       console.log("Uploading", imageFiles.length, "files to backend");
 
       // Upload to Cloudinary via our API
-      const response = await fetch(
-        "http://localhost:5000/api/upload/multiple",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const API_URL =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+      const response = await fetch(`${API_URL}/upload/multiple`, {
+        method: "POST",
+        body: formData,
+      });
 
       console.log("Response status:", response.status);
       console.log("Response ok:", response.ok);

@@ -119,13 +119,12 @@
 
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Lock, MapPin } from "lucide-react";
+import { MapPin, Lock } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -136,6 +135,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuth } from "@/context/AuthContext";
 import { translations } from "@/lib/translations";
 
@@ -228,7 +228,11 @@ export default function AdminLoginPage() {
               </Button>
             </form>
 
-         
+            <div className="mt-6 text-center text-sm text-muted-foreground">
+              <p>{translations.admin.demoCredentials}</p>
+              <p className="font-medium">Email: admin@fahrschulfinder.de</p>
+              <p className="font-medium">Password: 123456</p>
+            </div>
           </CardContent>
         </Card>
       </motion.div>
