@@ -230,8 +230,7 @@ export default function AdminLoginPage() {
 
             <div className="mt-6 text-center text-sm text-muted-foreground">
               <p>{translations.admin.demoCredentials}</p>
-              <p className="font-medium">Email: admin@fahrschulfinder.de</p>
-              <p className="font-medium">Password: 123456</p>
+             
             </div>
           </CardContent>
         </Card>
