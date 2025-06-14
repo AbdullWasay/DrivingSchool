@@ -226,27 +226,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="w-full py-12 md:py-16 bg-white">
-          <div className="container px-4 md:px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  className="flex flex-col items-center text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}>
-                  <div className="mb-2">{stat.icon}</div>
-                  <div className="text-3xl font-bold">{stat.value}</div>
-                  <div className="text-muted-foreground">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Comparison Results (Conditional) */}
         {showComparison && selectedCity && (
           <motion.section
@@ -284,6 +263,27 @@ export default function HomePage() {
             </div>
           </motion.section>
         )}
+
+        {/* Stats Section */}
+        <section className="w-full py-12 md:py-16 bg-white">
+          <div className="container px-4 md:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="flex flex-col items-center text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}>
+                  <div className="mb-2">{stat.icon}</div>
+                  <div className="text-3xl font-bold">{stat.value}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* How It Works Section */}
         <section

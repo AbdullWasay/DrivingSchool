@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Check, MapPin, Phone, Mail, Star } from "lucide-react";
 import Link from "next/link";
@@ -24,107 +25,58 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PriceCalculator from "@/components/price-calculator";
+// Dynamically import components that might cause hydration issues
+const PriceCalculator = dynamic(() => import("@/components/price-calculator"), {
+  ssr: false,
+  loading: () => <div className="h-64 bg-muted animate-pulse rounded-lg" />,
+});
+
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import NoSSR from "@/components/no-ssr";
+import { mockSchools } from "@/lib/mock-data";
 import { translations } from "@/lib/translations";
 
-// Mock data for schools
-const mockSchools = [
-  {
-    id: 1,
-    name: "Fahrschule Schmidt",
-    image:
-      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    rating: 4.8,
-    averagePrice: 1850.0,
-    address: "Hauptstraße 123",
-    city: "Berlin",
-    email: "info@fahrschule-schmidt.de",
-    phone: "+49 30 1234567",
-    services: [
-      translations.comparison.carLicense,
-      translations.comparison.motorcycleLicense,
-      translations.comparison.refresherCourses,
-      translations.comparison.intensiveCourses,
-    ],
-    prices: {
-      registrationFee: 100,
-      theoryLesson: 15,
-      drivingLesson: 50,
-      nightDriving: 55,
-      highwayDriving: 55,
-      examFee: 150,
-      theoryExam: 80,
-    },
-  },
-  {
-    id: 2,
-    name: "City Fahrschule",
-    image:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    rating: 4.5,
-    averagePrice: 1750.0,
-    address: "Berliner Str. 45",
-    city: "Hamburg",
-    email: "info@city-fahrschule.de",
-    phone: "+49 40 9876543",
-    services: [
-      translations.comparison.carLicense,
-      translations.comparison.truckLicense,
-      translations.comparison.automaticTransmission,
-      translations.comparison.onlineTheory,
-    ],
-    prices: {
-      registrationFee: 90,
-      theoryLesson: 14,
-      drivingLesson: 48,
-      nightDriving: 52,
-      highwayDriving: 52,
-      examFee: 140,
-      theoryExam: 75,
-    },
-  },
-  {
-    id: 3,
-    name: "Drive Easy",
-    image:
-      "https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    rating: 4.9,
-    averagePrice: 1950.0,
-    address: "Hauptstraße 78",
-    city: "Munich",
-    email: "info@drive-easy.de",
-    phone: "+49 89 5556677",
-    services: [
-      translations.comparison.carLicense,
-      translations.comparison.anxietySupport,
-      translations.comparison.foreignLanguageSupport,
-      translations.comparison.refresherCourses,
-    ],
-    prices: {
-      registrationFee: 110,
-      theoryLesson: 16,
-      drivingLesson: 55,
-      nightDriving: 60,
-      highwayDriving: 60,
-      examFee: 160,
-      theoryExam: 85,
-    },
-  },
-];
+// Convert mock data to comparison format with proper images and German services
+const comparisonSchools = mockSchools.map((school) => ({
+  ...school,
+  image: school.image?.includes("placeholder")
+    ? "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    : school.image,
+  services: school.services.map((service) => {
+    // Map English services to German translations
+    const serviceMap = {
+      "PKW-Führerschein (B)": translations.comparison.carLicense,
+      "Motorradführerschein (A)": translations.comparison.motorcycleLicense,
+      "LKW-Führerschein (C)": translations.comparison.truckLicense,
+      Auffrischungskurse: translations.comparison.refresherCourses,
+      Intensivkurse: translations.comparison.intensiveCourses,
+      Automatikgetriebe: translations.comparison.automaticTransmission,
+      "Online-Theorie": translations.comparison.onlineTheory,
+      "Angst-Unterstützung": translations.comparison.anxietySupport,
+      Fremdsprachenunterstützung:
+        translations.comparison.foreignLanguageSupport,
+    };
+    return serviceMap[service] || service;
+  }),
+}));
 
 export default function ComparisonPage() {
   const [selectedCity, setSelectedCity] = useState("all");
-  const [filteredSchools, setFilteredSchools] = useState(mockSchools);
+  const [filteredSchools, setFilteredSchools] = useState(comparisonSchools);
   const [experienceLevel, setExperienceLevel] = useState("beginner");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (selectedCity === "all") {
-      setFilteredSchools(mockSchools);
+      setFilteredSchools(comparisonSchools);
     } else {
       setFilteredSchools(
-        mockSchools.filter(
+        comparisonSchools.filter(
           (school) => school.city.toLowerCase() === selectedCity.toLowerCase()
         )
       );
@@ -132,7 +84,7 @@ export default function ComparisonPage() {
   }, [selectedCity]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" suppressHydrationWarning>
       <Navbar />
       <main className="flex-1 py-12">
         <div className="container px-4 md:px-6">
@@ -145,36 +97,40 @@ export default function ComparisonPage() {
                 <Label htmlFor="city-filter">
                   {translations.comparison.filterByCity}
                 </Label>
-                <Select value={selectedCity} onValueChange={setSelectedCity}>
-                  <SelectTrigger id="city-filter" className="w-full">
-                    <SelectValue
-                      placeholder={translations.comparison.selectCity}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">
-                      {translations.comparison.allCities}
-                    </SelectItem>
-                    <SelectItem value="berlin">
-                      {translations.comparison.berlin}
-                    </SelectItem>
-                    <SelectItem value="hamburg">
-                      {translations.comparison.hamburg}
-                    </SelectItem>
-                    <SelectItem value="munich">
-                      {translations.comparison.munich}
-                    </SelectItem>
-                    <SelectItem value="solingen">
-                      {translations.comparison.solingen}
-                    </SelectItem>
-                    <SelectItem value="cologne">
-                      {translations.comparison.cologne}
-                    </SelectItem>
-                    <SelectItem value="frankfurt">
-                      {translations.comparison.frankfurt}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                {mounted ? (
+                  <Select value={selectedCity} onValueChange={setSelectedCity}>
+                    <SelectTrigger id="city-filter" className="w-full">
+                      <SelectValue
+                        placeholder={translations.comparison.selectCity}
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">
+                        {translations.comparison.allCities}
+                      </SelectItem>
+                      <SelectItem value="berlin">
+                        {translations.comparison.berlin}
+                      </SelectItem>
+                      <SelectItem value="hamburg">
+                        {translations.comparison.hamburg}
+                      </SelectItem>
+                      <SelectItem value="munich">
+                        {translations.comparison.munich}
+                      </SelectItem>
+                      <SelectItem value="solingen">
+                        {translations.comparison.solingen}
+                      </SelectItem>
+                      <SelectItem value="cologne">
+                        {translations.comparison.cologne}
+                      </SelectItem>
+                      <SelectItem value="frankfurt">
+                        {translations.comparison.frankfurt}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <div className="h-10 bg-muted animate-pulse rounded-md" />
+                )}
               </div>
               <div className="w-full md:w-2/3">
                 <PriceCalculator schools={filteredSchools} />
@@ -279,38 +235,43 @@ export default function ComparisonPage() {
                             <div className="mb-3 font-medium">
                               {translations.comparison.selectExperience}
                             </div>
-                            <RadioGroup
-                              value={experienceLevel}
-                              onValueChange={setExperienceLevel}
-                              className="grid grid-cols-1 gap-2">
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem
-                                  value="beginner"
-                                  id={`beginner-${school.id}`}
-                                />
-                                <Label htmlFor={`beginner-${school.id}`}>
-                                  {translations.comparison.beginner}
-                                </Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem
-                                  value="intermediate"
-                                  id={`intermediate-${school.id}`}
-                                />
-                                <Label htmlFor={`intermediate-${school.id}`}>
-                                  {translations.comparison.intermediate}
-                                </Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem
-                                  value="advanced"
-                                  id={`advanced-${school.id}`}
-                                />
-                                <Label htmlFor={`advanced-${school.id}`}>
-                                  {translations.comparison.advanced}
-                                </Label>
-                              </div>
-                            </RadioGroup>
+                            <NoSSR
+                              fallback={
+                                <div className="h-24 bg-muted animate-pulse rounded-md" />
+                              }>
+                              <RadioGroup
+                                value={experienceLevel}
+                                onValueChange={setExperienceLevel}
+                                className="grid grid-cols-1 gap-2">
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem
+                                    value="beginner"
+                                    id={`beginner-${school.id}`}
+                                  />
+                                  <Label htmlFor={`beginner-${school.id}`}>
+                                    {translations.comparison.beginner}
+                                  </Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem
+                                    value="intermediate"
+                                    id={`intermediate-${school.id}`}
+                                  />
+                                  <Label htmlFor={`intermediate-${school.id}`}>
+                                    {translations.comparison.intermediate}
+                                  </Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem
+                                    value="advanced"
+                                    id={`advanced-${school.id}`}
+                                  />
+                                  <Label htmlFor={`advanced-${school.id}`}>
+                                    {translations.comparison.advanced}
+                                  </Label>
+                                </div>
+                              </RadioGroup>
+                            </NoSSR>
                           </div>
                         </div>
                         <div className="flex justify-between">
